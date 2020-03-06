@@ -1,0 +1,47 @@
+#signupform{
+    margin: 30px auto 30px auto;
+}
+.profilephoto{
+    position: relative;
+    transition: all .5s;
+    cursor: pointer;
+    width:200px; 
+    height:200px;
+    margin: auto;
+}
+#profilephotohover{
+    width:200px; 
+    position: absolute;
+    top:0;
+    height:200px;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    transition: all .5s;
+}
+#profilephotohover:hover{
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#btnUpload{
+position: absolute;
+bottom: 19%;
+left: 18%;
+color: white;
+font-size: 16px;
+display: none;
+transition: all .5s;
+/* border-top: 1px solid white; */
+
+}
+hr{
+    position: absolute;
+    bottom: 10px;
+    border: 1px solid white;
+    z-index: 10000;
+    width: 100%;
+}
+
+.profilephoto:hover #btnUpload{
+    /* position: relative; */
+    
+    display: block;
+}
