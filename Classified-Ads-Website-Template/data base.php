@@ -16,7 +16,8 @@ class Database
                if(!mysqli_query($this->conn,$statment))
                {
                    return  mysqli_error($this->conn);
-               }
+     
+                  }
            else{
                return "ok";}
        }
