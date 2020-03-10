@@ -108,7 +108,7 @@ if (isset($_SESSION['user'])) {
                           
                     ?>
                   <li>
-                    <a href="City_details.php<?php echo($row['City_Id']);?>">
+                    <a href="City_details.php?id=<?php echo($row['City_Id']);?>">
                       <i class="lni-home"></i>
                      <?php echo($row['City_Name']);?> <span class="category-counter">(<?php echo($row['Parking_Count']);?>)</span>
                     </a>

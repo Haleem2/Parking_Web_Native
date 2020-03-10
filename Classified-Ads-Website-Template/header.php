@@ -92,7 +92,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="category.html">
+              <a class="nav-link" href="Cities.php">
                 Categories
               </a>
             </li>
@@ -111,7 +111,7 @@
                   while ($row=mysqli_fetch_assoc($data)) { 
 
                 ?>
-                <a class="dropdown-item" href="adlistinggrid.html"><?php echo($row["City_Name"]);?></a>
+                <a class="dropdown-item" href="City_details.php?id=<?php echo($row["City_Id"]);?>"><?php echo($row["City_Name"]);?></a>
                 <?php
                   }
                 ?>

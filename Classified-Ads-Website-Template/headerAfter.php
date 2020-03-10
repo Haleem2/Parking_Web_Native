@@ -131,7 +131,7 @@ if (isset($_SESSION['user'])) {
                   
 
                 ?>
-                <a class="dropdown-item" href="adlistinggrid.html"><?php echo($row["City_Name"]);?></a>
+                <a class="dropdown-item" href="City_details.php?id=<?php echo($row["City_Id"]);?>"><?php echo($row["City_Name"]);?></a>
 
 
                 <?php
