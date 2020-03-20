@@ -4,86 +4,62 @@ ob_start(); // Initiate the output buffer
 session_start();
 
 if (isset($_SESSION['user'])) {
-    include_once "headerAfter.php";
-}else{
-  include_once "header.php"; 
+  include_once "headerAfter.php";
+} else {
+  include_once "header.php";
 }
 ?>
 
-  <div id="main-slide" class="carousel slide" data-ride="carousel">
+<div id="main-slide" class="carousel slide" data-ride="carousel">
 
-    <div class="carousel-inner">
-      <?php
-          include_once "Offers.php";
-          $offer = new Offers();
-          $data = $offer ->GetAll();
-          $active = 'active';
-          $i=0;
-          while ($row=mysqli_fetch_assoc($data)) { 
-            if($i == 0){
-      ?>
-        <div class="carousel-item <?php echo($active);?>">
-      <?php
+  <div class="carousel-inner">
+    <?php
+    include_once "Offers.php";
+    $offer = new Offers();
+    $data = $offer->GetAll();
+    $active = 'active';
+    $i = 0;
+    while ($row = mysqli_fetch_assoc($data)) {
+      if ($i == 0) {
+    ?>
+        <div class="carousel-item <?php echo ($active); ?>">
+        <?php
         $i++;
-       }else{
-      ?>
+      } else {
+        ?>
 
-      <div class="carousel-item">
+          <div class="carousel-item">
+
+          <?php
+        }
+          ?>
+          <img class="d-block w-100" src="assets/img/slider/<?php echo ($row['Offer_No']); ?>.jpg" alt="First slide" />
+          <div class="carousel-caption d-md-block">
+            <h1 class="animated wow fadeInDown hero-heading" data-wow-delay=".4s">
+              <?php echo ($row['Title']); ?>
+            </h1>
+            <p class="animated fadeInUp wow hero-sub-heading" data-wow-delay=".6s">
+              <?php echo ($row['Details']); ?>
+            </p>
+            <a href="#" class="btn btn-common">Offer Detail</a>
+          </div>
+
+          </div>
 
         <?php
-        }
-        ?>  
-        <img
-          class="d-block w-100"
-          src="assets/img/slider/<?php echo($row['Offer_No']);?>.jpg"
-          alt="First slide"
-        />
-        <div class="carousel-caption d-md-block">
-          <h1
-            class="animated wow fadeInDown hero-heading"
-            data-wow-delay=".4s"
-          >
-          <?php echo($row['Title']);?>  
-          </h1>
-          <p
-            class="animated fadeInUp wow hero-sub-heading"
-            data-wow-delay=".6s"
-          >
-          <?php echo($row['Details']);?>
-          </p>
-          <a href="#" class="btn btn-common">Offer Detail</a>
+      }
+        ?>
+
         </div>
 
-      </div>
-
-      <?php
-        }
-      ?>
-     
-    </div>
-
-    <a
-      class="carousel-control-prev"
-      href="#main-slide"
-      role="button"
-      data-slide="prev"
-    >
-      <span class="carousel-control" aria-hidden="true"
-        ><i class="lni-chevron-left" data-ripple-color="#F0F0F0"></i
-      ></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a
-      class="carousel-control-next"
-      href="#main-slide"
-      role="button"
-      data-slide="next"
-    >
-      <span class="carousel-control" aria-hidden="true"
-        ><i class="lni-chevron-right" data-ripple-color="#F0F0F0"></i
-      ></span>
-      <span class="sr-only">Next</span>
-    </a>
+        <a class="carousel-control-prev" href="#main-slide" role="button" data-slide="prev">
+          <span class="carousel-control" aria-hidden="true"><i class="lni-chevron-left" data-ripple-color="#F0F0F0"></i></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#main-slide" role="button" data-slide="next">
+          <span class="carousel-control" aria-hidden="true"><i class="lni-chevron-right" data-ripple-color="#F0F0F0"></i></span>
+          <span class="sr-only">Next</span>
+        </a>
   </div>
 
   <div class="search-button">
@@ -95,12 +71,7 @@ if (isset($_SESSION['user'])) {
               <form class="search-form" method="post">
                 <div class="form-group inputwithicon">
                   <i class="lni-tag"></i>
-                  <input
-                    type="text"
-                    name="customword"
-                    class="form-control"
-                    placeholder="What are you looking for?"
-                  />
+                  <input type="text" name="customword" class="form-control" placeholder="What are you looking for?" />
                 </div>
                 <div class="form-group inputwithicon">
                   <i class="lni-target"></i>
@@ -122,24 +93,24 @@ if (isset($_SESSION['user'])) {
                     <select>
                       <option value="none">Select City</option>
                       <?php
-                        include_once "City.php";
-                        $city = new City();
-                        $data = $city ->GetAll();
+                      include_once "City.php";
+                      $city = new City();
+                      $data = $city->GetAll();
 
-                        while ($row=mysqli_fetch_assoc($data)) {
-                          
+                      while ($row = mysqli_fetch_assoc($data)) {
+
                       ?>
-                      <option value="none"><?php echo($row["City_Name"]);?></option>
+                        <option value="none"><?php echo ($row["City_Name"]); ?></option>
                       <?php
-                        }
+                      }
                       ?>
                     </select>
                   </div>
                 </div>
                 <?php
                 if (isset($_POST['submit'])) {
-                  
-                  header("Location:search_result.php?key=".$_POST['customword']);
+
+                  header("Location:search_result.php?key=" . $_POST['customword']);
                 }
                 ?>
                 <button name="submit" class="btn btn-common" type="submit">
@@ -578,11 +549,7 @@ if (isset($_SESSION['user'])) {
               <h4>New York <span>(2116 Ads)</span></h4>
             </div>
             <div class="img-box-background">
-              <img
-                class="img-fluid"
-                src="assets/img/cities/img1.jpg"
-                alt=""
-              />
+              <img class="img-fluid" src="assets/img/cities/img1.jpg" alt="" />
             </div>
           </a>
         </div>
@@ -594,11 +561,7 @@ if (isset($_SESSION['user'])) {
                   <h4>California <span>(1073 Ads)</span></h4>
                 </div>
                 <div class="img-box-background">
-                  <img
-                    class="img-fluid"
-                    src="assets/img/cities/img2.jpg"
-                    alt=""
-                  />
+                  <img class="img-fluid" src="assets/img/cities/img2.jpg" alt="" />
                 </div>
               </a>
             </div>
@@ -608,11 +571,7 @@ if (isset($_SESSION['user'])) {
                   <h4>Washington <span>(1813 Ads)</span></h4>
                 </div>
                 <div class="img-box-background">
-                  <img
-                    class="img-fluid"
-                    src="assets/img/cities/img3.jpg"
-                    alt=""
-                  />
+                  <img class="img-fluid" src="assets/img/cities/img3.jpg" alt="" />
                 </div>
               </a>
             </div>
@@ -628,11 +587,7 @@ if (isset($_SESSION['user'])) {
                   <h4>Chicago <span>(1603 Ads)</span></h4>
                 </div>
                 <div class="img-box-background">
-                  <img
-                    class="img-fluid"
-                    src="assets/img/cities/img4.jpg"
-                    alt=""
-                  />
+                  <img class="img-fluid" src="assets/img/cities/img4.jpg" alt="" />
                 </div>
               </a>
             </div>
@@ -642,11 +597,7 @@ if (isset($_SESSION['user'])) {
                   <h4>Boston <span>(1298 Ads)</span></h4>
                 </div>
                 <div class="img-box-background">
-                  <img
-                    class="img-fluid"
-                    src="assets/img/cities/img5.jpg"
-                    alt=""
-                  />
+                  <img class="img-fluid" src="assets/img/cities/img5.jpg" alt="" />
                 </div>
               </a>
             </div>
@@ -658,11 +609,7 @@ if (isset($_SESSION['user'])) {
               <h4>Phoenix <span>(103 Ads)</span></h4>
             </div>
             <div class="img-box-background">
-              <img
-                class="img-fluid"
-                src="assets/img/cities/img6.jpg"
-                alt=""
-              />
+              <img class="img-fluid" src="assets/img/cities/img6.jpg" alt="" />
             </div>
           </a>
         </div>
@@ -713,45 +660,24 @@ if (isset($_SESSION['user'])) {
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
               <div class="form-group has-error">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  name="name"
-                  placeholder="Name"
-                />
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" />
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
               <div class="form-group has-error">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="catagory"
-                />
+                <input type="email" class="form-control" placeholder="catagory" />
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
               <div class="form-group has-error">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="phone"
-                  name="name"
-                  placeholder="Phone"
-                />
+                <input type="text" class="form-control" id="phone" name="name" placeholder="Phone" />
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
               <div class="form-group has-error">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  placeholder="Email"
-                />
+                <input type="email" class="form-control" id="email" placeholder="Email" />
               </div>
             </div>
           </div>
@@ -1113,14 +1039,8 @@ if (isset($_SESSION['user'])) {
             </div>
             <div class="blog-item-text">
               <div class="meta-tags">
-                <span class="user float-left"
-                  ><a href="#"
-                    ><i class="lni-user"></i> Posted By Admin</a
-                  ></span
-                >
-                <span class="date float-right"
-                  ><i class="lni-calendar"></i> 24 May, 2018</span
-                >
+                <span class="user float-left"><a href="#"><i class="lni-user"></i> Posted By Admin</a></span>
+                <span class="date float-right"><i class="lni-calendar"></i> 24 May, 2018</span>
               </div>
               <h3>
                 <a href="single-post.html">Recently Launching Our Iphone X</a>
@@ -1142,14 +1062,8 @@ if (isset($_SESSION['user'])) {
             </div>
             <div class="blog-item-text">
               <div class="meta-tags">
-                <span class="user float-left"
-                  ><a href="#"
-                    ><i class="lni-user"></i> Posted By Admin</a
-                  ></span
-                >
-                <span class="date float-right"
-                  ><i class="lni-calendar"></i> 24 May, 2018</span
-                >
+                <span class="user float-left"><a href="#"><i class="lni-user"></i> Posted By Admin</a></span>
+                <span class="date float-right"><i class="lni-calendar"></i> 24 May, 2018</span>
               </div>
               <h3>
                 <a href="single-post.html">How to get more ad views</a>
@@ -1171,19 +1085,11 @@ if (isset($_SESSION['user'])) {
             </div>
             <div class="blog-item-text">
               <div class="meta-tags">
-                <span class="user float-left"
-                  ><a href="#"
-                    ><i class="lni-user"></i> Posted By Admin</a
-                  ></span
-                >
-                <span class="date float-right"
-                  ><i class="lni-calendar"></i> 24 May, 2018</span
-                >
+                <span class="user float-left"><a href="#"><i class="lni-user"></i> Posted By Admin</a></span>
+                <span class="date float-right"><i class="lni-calendar"></i> 24 May, 2018</span>
               </div>
               <h3>
-                <a href="single-post.html"
-                  >Writing a better product description</a
-                >
+                <a href="single-post.html">Writing a better product description</a>
               </h3>
               <p>
                 Reprehenderit nemo quod tempore doloribus ratione distinctio
@@ -1214,13 +1120,7 @@ if (isset($_SESSION['user'])) {
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
           <form>
             <div class="subscribe">
-              <input
-                class="form-control"
-                name="EMAIL"
-                placeholder="Enter your Email"
-                required=""
-                type="email"
-              />
+              <input class="form-control" name="EMAIL" placeholder="Enter your Email" required="" type="email" />
               <button class="btn btn-common" type="submit">Subscribe</button>
             </div>
           </form>
@@ -1231,5 +1131,5 @@ if (isset($_SESSION['user'])) {
 
   <?php
   include "contactLinksBar.php";
-include "footer.php";
-?>
+  include "footer.php";
+  ?>

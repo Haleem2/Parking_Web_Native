@@ -23,6 +23,8 @@
   <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
   <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+<!-- boking styling page -->
+  <link rel="stylesheet" type="text/css" href="assets/css/booking.css" />
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 

@@ -1,26 +1,26 @@
 <footer>
 
-<div id="copyright">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="site-info text-center">
-          <p><a target="_blank" href="https://templateshub.net">Templates Hub</a></p>
+  <div id="copyright">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="site-info text-center">
+            <p><a target="_blank" href="https://templateshub.net">Templates Hub</a></p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
 </footer>
 
 
 <a href="#" class="back-to-top">
-<i class="lni-chevron-up"></i>
+  <i class="lni-chevron-up"></i>
 </a>
 
 <div id="preloader">
-<div class="loader" id="loader-1"></div>
+  <div class="loader" id="loader-1"></div>
 </div>
 
 
@@ -38,6 +38,8 @@
 <script src="assets/js/form-validator.min.js"></script>
 <script src="assets/js/contact-form-script.min.js"></script>
 <script src="assets/js/summernote.js"></script>
+<!-- js file for booking page -->
+<script src="assets/js/booking.js"></script>
 </body>
 
 
