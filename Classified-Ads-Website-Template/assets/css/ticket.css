@@ -1,0 +1,13 @@
+/* body {
+  margin-top: 20px;
+} */
+.page-title {
+  font-size: 62px;
+  font-weight: 700;
+  color: #1b1a1a;
+}
+.ticket-body {
+  border: 3px solid #e91e63;
+  border-radius: 5%;
+  padding: 30px;
+}

@@ -49,7 +49,7 @@ $(document).on('click', '.selected', function() {
        remove(numArray,idValue);
        $(this).removeClass("selected");
        $(this).addClass("vacant");
-       var x = document.getElementById("slotId")
+       var x = document.getElementById("slotId");
      x.value='';
 });
 
@@ -58,7 +58,7 @@ function remove(array, element) {
     array.splice(index, 1);
 }
     
-$('.submit-service-type').click(function() {
+$('.submit-service-type').click(function(e) {
   var serviceType = $('#servie-type-field').val();
 
   if (serviceType === 'parking') {
@@ -68,10 +68,37 @@ $('.submit-service-type').click(function() {
   return false;
 })
 
-$('.service-type-parking-time-form').submit(function(){
-  if(this.checkValidity()) {
-    $('.service-type-parking-contents').show();
-  }
 
+ $('.service-type-parking-time-form').submit(function(e){
+  e.preventDefault()
+  var x = document.getElementById("slotId");
+  x.value='';
+  const parking = e.target.dataset.parking;
+   const elements = e.target.elements;
+
+  document.getElementById('selected_date_from').value = `${ elements["date_from"].value }`;
+   document.getElementById('selected_time_from').value = `${ elements["time_from"].value }`;
+   document.getElementById('selected_date_to').value = `${ elements["date_to"].value }`;
+   document.getElementById('selected_time_to').value = `${ elements["time_to"].value }`;
+
+   const from = `${ elements["date_from"].value } ${ elements["time_from"].value }`;
+   const to = `${ elements["date_to"].value } ${ elements["time_to"].value }`;
+  if(this.checkValidity()) {
+    if (from >= to) {
+      alert('please enter valid date and time')
+    } else {
+    $('.service-type-parking-contents').show();
+    // read product record based on given ID
+    const url = "http://localhost:8888/Classified-Ads-Website-Template/Parking_Web_Native/Classified-Ads-Website-Template/rr.php";
+    $.getJSON(`${url}?id=${parking}&from=${from}&to=${to}`, function(data){
+      // read products button will be here
+      $.each(data, function(key, val) { 
+        document.getElementById(`S${val.Slot_Id}`).className =  val.Status ? 'selectedd': 'vacant';
+       });
+    
+     });
+    }
+  }
   return false;
 });
+

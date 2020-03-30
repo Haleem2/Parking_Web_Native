@@ -269,7 +269,7 @@
     background-color: #e91e63;
 }
 
-table {
+.service-type-parking-contents .row .row table {
   border-collapse: separate;
   border-spacing: 20px;
   background-image: url('../img/asphalt.jpg');
@@ -277,7 +277,7 @@ table {
   margin-top: 15px;
 }
 
-td {
+.service-type-parking-contents .row .row td {
   height: 30px;
   min-width: 120px;
   margin: 5px;
@@ -286,7 +286,7 @@ td {
   border: initial !important;
 }
 
-tr td {
+.service-type-parking-contents .row .row  tr td {
   border-left: 6px solid #c4c700dd !important;
   border-bottom: 6px solid #c4c700dd !important;
 }

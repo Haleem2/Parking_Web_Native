@@ -1,12 +1,14 @@
 <?php
+
+use PhpParser\Node\Expr\New_;
+
 ob_start();
 session_start();
-
-if (isset($_SESSION['user'])) {
-  include_once "headerAfter.php";
-} else {
-  include_once "header.php";
-}
+include_once "headerAfter.php";
+include_once "Car Owner.php";
+include_once "Parking.php";
+include_once "Car_slot.php";
+include_once "City.php";
 
 ?>
 <!-- header and search bar  -->
@@ -44,7 +46,6 @@ if (isset($_SESSION['user'])) {
                       <select>
                         <option value="none">Select City</option>
                         <?php
-                        include_once "City.php";
                         $city = new City();
                         $data = $city->GetAll();
 
@@ -98,16 +99,15 @@ if (isset($_SESSION['user'])) {
                 <i class="lni-search"></i>
               </button>
             </form>
-          </div>
-          <!-- end side seach bar -->
+          </div> <!-- end side seach bar -->
+
+
           <!-- side bar cities -->
           <div class="widget categories">
             <h4 class="widget-title">All Cities</h4>
             <ul class="categories-list">
 
               <?php
-              include_once "City.php";
-              $city = new City();
               $data = $city->GetAllCities();
               while ($row = mysqli_fetch_assoc($data)) {
 
@@ -123,8 +123,8 @@ if (isset($_SESSION['user'])) {
               }
               ?>
             </ul>
-          </div>
-          <!-- end of side bar cities-->
+          </div><!-- end of side bar cities-->
+
 
           <!-- side bar advertisement -->
           <div class="widget">
@@ -132,25 +132,31 @@ if (isset($_SESSION['user'])) {
             <div class="add-box">
               <img class="img-fluid" src="assets/img/img1.jpg" alt="" />
             </div>
-          </div>
-          <!-- end side bar advertisement -->
+          </div> <!-- end side bar advertisement -->
+
         </aside>
-      </div>
-      <!-- end side bar -->
+      </div><!-- end side bar -->
+
       <div class="col-lg-9 col-md-12 col-xs-12 page-content">
-        
+
         <!--  Booking  section -->
         <?php
-        include_once "Parking.php";
-        include_once "Car_slot.php";
         $parking = new Parking();
-        $slot= new Car_Slot();
+        $slot = new Car_Slot();
+        $cars = new Car_Owner();
+        $cars->setID($_SESSION['id']);
         $parking->setParkingId($_GET['id']);
         $slot->setParkingId($_GET['id']);
-        $details=$slot->parkingSlots();
+        $slot->setUserId($_SESSION['id']);
+        $select_car = $cars->GetDataById();
+        $details = $slot->parkingSlots();
+        $booked = $slot->bookedSlots();
+        $reservation_count = $slot->bookingCount();
         $res = $parking->parkingDetails();
-        if ($row = mysqli_fetch_assoc($res)) {
 
+
+
+        if ($row = mysqli_fetch_assoc($res)) {
         ?>
 
           <div class="wrapper">
@@ -160,6 +166,7 @@ if (isset($_SESSION['user'])) {
                 <div class=" con-div col-lg-12 col-md-6 col-sm-6">
                   <div class="container">
                     <div class="row">
+                      <!-- select service form  -->
                       <form class="col-lg-12 m-3">
                         <label class="select-service">Select Service</label>
                         <div class=" form-group m-2">
@@ -174,56 +181,111 @@ if (isset($_SESSION['user'])) {
                           <input type="submit" class="btn submit-service-type submit-ticket">
                         </div>
                       </form>
-                      <div class="service-type-contents " >
-                        <form action="#" class="col-lg-12 m-3 row service-type-parking-time-form">
-                          <label class="col-1">From</label>
-                          <div class="form-row show-inputbtns col-lg-6 offset-1 mb-2">
-                            <input required type="date" data-date-inline-picker="false" class="form-control" data-date-open-on-focus="true" />
-                          </div>
-
-                          <div class="form-row show-inputbtns col-lg-5 mb-2">
-                            <input required type="time" name="time" step="900" class="form-control" />
-                          </div>
-
-                          <label class="col-1">To</label>
-                          <div class="form-row show-inputbtns col-lg-6 offset-1 mb-2">
-                            <input required type="date" data-date-inline-picker="false" class="form-control" data-date-open-on-focus="true" />
-                          </div>
-
-                          <div class="form-row show-inputbtns col-lg-5 mb-2">
-                            <input required type="time" name="time" step="900" class="form-control" />
-                          </div>
-
-                          <div class="col-lg-12 text-right">
-                            <input type="submit" class=" btn submit-ticket service-type-parking-time" />
-                          </div>
-                        </form>
-
-                        <form action="" method="POST" class="col-lg-12 m-3 service-type-parking-contents">
-                          <div class="row m-3">
-                            <label class="select-service  mb-2">Booking Slots:</label>
-                            <input type="number" hidden name="slotId" id="slotId">
-                            <div class="form-row show-inputbtns m-3">
+                      <div class="service-type-contents ">
+                        <!-- selcted time and date form -->
+                        <?php
+                        $count = mysqli_fetch_assoc($reservation_count);
+                        
+                        if ($count['ticket_count'] < 2) {
+                        ?>
+                          <form class="col-lg-12 m-3 row service-type-parking-time-form" data-parking="<?php echo ($_GET['id']); ?>">
+                            <label class="col-1">From</label>
+                            <div class="form-row show-inputbtns col-lg-6 offset-1 mb-2">
+                              <input required name="date_from" type="date" data-date-inline-picker="false" class="form-control" data-date-open-on-focus="true" />
                             </div>
-                            <div class="row">
-                            <table class="table-bordered table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                              <tbody class="reservationTable row">
-                                <?php while ($det = mysqli_fetch_assoc($details)) { ?>
-                                  <tr id="1" class="tr-1 col-6 col-sm-6 col-md-4 col-lg-3 ">
-                                    <td id="<?php echo ($det['Slot_Id']); ?>" class="<?php echo ($det['status'] ? 'selectedd': 'vacant');?>">
-                                      <div></div>
-                                    </td>
-                                  </tr>
-                                <?php } ?>
-                              </tbody>
-                            </table>
+
+                            <div class="form-row show-inputbtns col-lg-5 mb-2">
+                              <input required name="time_from" type="time" name="time" step="900" class="form-control" />
                             </div>
-                          </div>
-                          <div class="col-lg-12 text-right">
-                            <input type="submit" class=" btn submit-ticket" />
-                          </div>
-                        </form>
+
+                            <label class="col-1">To</label>
+                            <div class="form-row show-inputbtns col-lg-6 offset-1 mb-2">
+                              <input required name="date_to" type="date" data-date-inline-picker="false" class="form-control" data-date-open-on-focus="true" />
+                            </div>
+
+                            <div class="form-row show-inputbtns col-lg-5 mb-2">
+                              <input required name="time_to" type="time" name="time" step="900" class="form-control" />
+                            </div>
+
+                            <div class="col-lg-12 text-right">
+                              <input type="submit" class=" btn submit-ticket service-type-parking-time" />
+                            </div>
+                          </form>
+                          <!-- rgistiration selected slot form  -->
+                          <form method="POST" action="" class="col-lg-12 m-3 service-type-parking-contents">
+                            <!-- session to store ticket details -->
+                            <?php
+                            if (isset($_POST['submit_ticket'])) {
+
+                              $slot_id = $_POST['slotId'];
+                              $slot_id = str_replace('S', '', $slot_id);
+                              $_SESSION['slot_id'] = $slot_id;
+                              $date_from = $_POST['selected_date_from'];
+                              $_SESSION['selected_date_from'] = $date_from;
+                              $time_from = $_POST['selected_time_from'];
+                              $_SESSION['selected_time_from'] = $time_from;
+                              $date_to = $_POST['selected_date_to'];
+                              $_SESSION['selected_date_to'] = $date_to;
+                              $time_to = $_POST['selected_time_to'];
+                              $_SESSION['selected_time_to'] = $time_to;
+                              $selected_car_number = $_POST['carNum'];
+                              if ($selected_car_number) {
+                                $_SESSION['selected_car_number'] = $selected_car_number;
+                                header('location:ticket_user.php?id=' . $_GET['id']);
+                              } else {
+                                echo ('<h3 class="alert alert-warning">Please Select Car</h3>');
+                              }
+                            }
+                            ?>
+                            <div class="row m-3">
+                              <label class="select-service  mb-2">Booking Slots:</label>
+                              <input type="text" hidden name="slotId" required id="slotId">
+                              <div class="form-row show-inputbtns m-3">
+                              </div>
+                              <div class="row">
+                                <input hidden id="selected_date_from" name="selected_date_from" type="date" data-date-inline-picker="false" class="form-control" data-date-open-on-focus="true" />
+                                <input hidden id="selected_time_from" name="selected_time_from" type="time" step="900" class="form-control" />
+                                <input hidden id="selected_date_to" name="selected_date_to" type="date" data-date-inline-picker="false" class="form-control" data-date-open-on-focus="true" />
+                                <input hidden id="selected_time_to" name="selected_time_to" type="time" step="900" class="form-control" />
+
+                                <table class=" table-bordered table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                  <tbody class="reservationTable row">
+                                    <?php
+                                    // $_SESSION['id'];
+                                    // $_SESSION['user'];
+                                    while ($det = mysqli_fetch_assoc($details)) {
+                                      // $b = mysqli_fetch_array($booked);
+
+                                    ?>
+                                      <tr id="1" class=" tr-1 col-6 col-sm-6 col-md-4 col-lg-3 ">
+                                        <td id="S<?php echo ($det['Slot_Id']); ?>" class="">
+                                          <div></div>
+                                        </td>
+                                      </tr>
+                                    <?php } ?>
+                                    <label for="carNum" class="select-service" style="font-size: 20px">Select Your Car: </label>
+                                    <div class="form-group col-md-4">
+                                      <select class="form-control " name="carNum" required>
+                                        <?php while ($carNum = mysqli_fetch_assoc($select_car)) { ?>
+                                          <option value="<?php echo ($carNum['Car Number']); ?>"><?php echo ($carNum['Car Number'] . '--' . $carNum['Car Type']); ?></option>
+                                        <?php } ?>
+                                      </select>
+                                    </div>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <div class="col-lg-12 text-right">
+                              <input type="submit" name="submit_ticket" class=" btn submit-ticket" />
+                            </div>
+                          </form>
+                        <?php
+                        } else {
+                          echo (' <h3 class="alert alert-warning">you have running reservation</h3>');
+                        }
+                        ?>
                       </div>
+
 
                       <div class="col-lg-9  m-3">
                         <h3>Our Parking</h3>
@@ -244,7 +306,9 @@ if (isset($_SESSION['user'])) {
           </div>
         <?php } else { ?>
           <h3 class="alert alert-warning">No parking</h3>
-        <?php } ?>
+        <?php }
+
+        ?>
       </div>
     </div>
   </div>

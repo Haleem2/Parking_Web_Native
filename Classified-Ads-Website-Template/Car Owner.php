@@ -154,7 +154,7 @@ class Car_Owner extends Database implements operations
    ///////////////////
    public function Add(){
 
-      return parent::RunDML("insert into `car owner` values (Default,'".$this->GetName()."','".$this->GetPassword()."','".$this->GetPhoneNum()."','".$this->GetAddress()."','".$this->GetEmail()."',Default)");
+      return parent::RunDML("insert into `car owner` values (Default,'".$this->GetName()."','".sha1($this->GetPassword())."','".$this->GetPhoneNum()."','".$this->GetAddress()."','".$this->GetEmail()."',Default)");
    }
 
    public function AddCar(){
@@ -169,7 +169,7 @@ class Car_Owner extends Database implements operations
 
    public function Update(){
 
-   	 return parent::RunDML("update `car owner` set  Password='".$this->GetPassword()."' where Owner_Id='".$this->GetID()."' ");
+   	 return parent::RunDML("update `car owner` set  Password='".sha1($this->GetPassword())."' where Owner_Id='".$this->GetID()."' ");
 
    }
    public function Delet(){
@@ -191,7 +191,7 @@ class Car_Owner extends Database implements operations
 
    public function Login(){
 
-   $log=parent::CheckData("select * from `car owner` where (Email ='".$this->GetEmail()."' or Phone_Number='".$this->GetPhoneNum()."') and Password='".$this->GetPassword()."'");
+   $log=parent::CheckData("select * from `car owner` where (Email ='".$this->GetEmail()."' or Phone_Number='".$this->GetPhoneNum()."') and Password='".sha1($this->GetPassword())."'");
   
    return $log;
 
@@ -199,7 +199,7 @@ class Car_Owner extends Database implements operations
 
     public function CheckById(){
 
-			$log=parent::CheckData("select * from `car owner` where Owner_Id ='".$this->GetID()."'and Password='".$this->GetPassword()."'");
+			$log=parent::CheckData("select * from `car owner` where Owner_Id ='".$this->GetID()."'and Password='".sha1($this->GetPassword())."'");
 			return $log;
         
     }
@@ -218,48 +218,50 @@ class Car_Owner extends Database implements operations
     return $log;
  
  }
+
+ public function UserData()
+ {
+    $pro=parent::CheckData("select * from `car owner` where Owner_Id ='".$this->GetID()."'");
+    return $pro;
+}
  
 
+//    public function fnEncrypt($sValue, $sSecretKey)
+//    {
+//        return rtrim(
+//            base64_encode(
+//             openssl_encrypt(
+//                 $sValue, 
+//                 'AES-256-CBC',
+//                    $sSecretKey, 
+//                    OPENSSL_RAW_DATA, 
+//                  openssl_random_pseudo_bytes(
+//                        mcrypt_get_iv_size(
+//                            MCRYPT_RIJNDAEL_256, 
+//                            MCRYPT_MODE_ECB
+//                        ), 
+//                        MCRYPT_RAND)
+//                    )
+//                ), "\0"
+//            );
+//    }
 
-   public function fnEncrypt($sValue, $sSecretKey)
-   {
-       return rtrim(
-           base64_encode(
-               mcrypt_encrypt(
-                   MCRYPT_RIJNDAEL_256,
-                   $sSecretKey, $sValue, 
-                   MCRYPT_MODE_ECB, 
-                   mcrypt_create_iv(
-                       mcrypt_get_iv_size(
-                           MCRYPT_RIJNDAEL_256, 
-                           MCRYPT_MODE_ECB
-                       ), 
-                       MCRYPT_RAND)
-                   )
-               ), "\0"
-           );
-   }
-
-   public  function fnDecrypt($sValue, $sSecretKey)
-       {
-           return rtrim(
-               mcrypt_decrypt(
-                   MCRYPT_RIJNDAEL_256, 
-                   $sSecretKey, 
-                   base64_decode($sValue), 
-                   MCRYPT_MODE_ECB,
-                   mcrypt_create_iv(
-                       mcrypt_get_iv_size(
-                           MCRYPT_RIJNDAEL_256,
-                           MCRYPT_MODE_ECB
-                       ), 
-                       MCRYPT_RAND
-                   )
-               ), "\0"
-           );
-       }
-}
-
-
-
-?>
+//    public  function fnDecrypt($sValue, $sSecretKey)
+//        {
+//            return rtrim(
+//                mcrypt_decrypt(
+//                    MCRYPT_RIJNDAEL_256, 
+//                    $sSecretKey, 
+//                    base64_decode($sValue), 
+//                    MCRYPT_MODE_ECB,
+//                    mcrypt_create_iv(
+//                        mcrypt_get_iv_size(
+//                            MCRYPT_RIJNDAEL_256,
+//                            MCRYPT_MODE_ECB
+//                        ), 
+//                        MCRYPT_RAND
+//                    )
+//                ), "\0"
+//            );
+//        }
+ }

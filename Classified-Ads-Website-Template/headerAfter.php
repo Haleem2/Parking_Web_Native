@@ -27,8 +27,11 @@
 
   <link rel="stylesheet" type="text/css"  href="assets/css/galal.css" >
 
-  <!-- boking styling page -->
+  <!-- booking styling page -->
   <link rel="stylesheet" type="text/css" href="assets/css/booking.css" />
+
+   <!-- ticket user styling page -->
+   <link rel="stylesheet" type="text/css" href="assets/css/ticket.css" />
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
