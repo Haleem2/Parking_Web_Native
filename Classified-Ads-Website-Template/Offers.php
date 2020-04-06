@@ -32,5 +32,11 @@ class Offers extends Database implements operations
     return $data;
   }
 
+  public function BoardMember(){
+
+    $data = parent::CheckData('select * from `board_member`');
+    return $data;
+  }
+
 }
 ?>

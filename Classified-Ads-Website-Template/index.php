@@ -61,7 +61,7 @@ if (isset($_SESSION['user'])) {
           <span class="sr-only">Next</span>
         </a>
   </div>
-
+  <!-- search bar section  -->
   <div class="search-button">
     <div class="container">
       <div class="row">
@@ -123,16 +123,16 @@ if (isset($_SESSION['user'])) {
       </div>
     </div>
   </div>
-<?php
-include_once "City.php";
-$most_visited=new City();
-$counts= $most_visited->Most_visited();
-$data=[];
-while($row=mysqli_fetch_assoc($counts)){
-array_push($data,$row);
-}
-// var_dump($data);
-?>
+
+  <!-- most visited cities section -->
+  <?php
+  $most_visited = new City();
+  $counts = $most_visited->Most_visited();
+  $data = [];
+  while ($row = mysqli_fetch_assoc($counts)) {
+    array_push($data, $row);
+  }
+  ?>
   <section class="cities bg-light section-padding">
     <div class="container">
       <h1 class="section-title">Browse By Cities</h1>
@@ -140,10 +140,10 @@ array_push($data,$row);
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
           <a href="City_details.php?id=<?php echo ($data[0]['City_Id']); ?>" class="img-box">
             <div class="img-box-content">
-            <h4><?php echo($data[0]['City_Name']);?> <span>(<?php echo($data[0]['ticket_count']);?>) </span></h4>
+              <h4><?php echo ($data[0]['City_Name']); ?> <span>(<?php echo ($data[0]['ticket_count']); ?>) </span></h4>
             </div>
             <div class="img-box-background">
-              <img class="img-fluid" src="assets/img/cities/<?php echo ($data[0]['City_Id']); ?>.jpg" alt="" />
+              <img class="img-fluid" src="assets/img/cities/<?php echo ($data[0]['City_Id']); ?>L.jpg" alt="" />
             </div>
           </a>
         </div>
@@ -152,7 +152,7 @@ array_push($data,$row);
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <a href="City_details.php?id=<?php echo ($data[1]['City_Id']); ?>" class="img-box">
                 <div class="img-box-content">
-                  <h4><?php echo($data[1]['City_Name']);?> <span>(<?php echo($data[1]['ticket_count']);?>) </span></h4>
+                  <h4><?php echo ($data[1]['City_Name']); ?> <span>(<?php echo ($data[1]['ticket_count']); ?>) </span></h4>
                 </div>
                 <div class="img-box-background">
                   <img class="img-fluid" src="assets/img/cities/<?php echo ($data[1]['City_Id']); ?>.jpg" alt="" />
@@ -162,7 +162,7 @@ array_push($data,$row);
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <a href="City_details.php?id=<?php echo ($data[2]['City_Id']); ?>" class="img-box">
                 <div class="img-box-content">
-                <h4><?php echo($data[2]['City_Name']);?> <span>(<?php echo($data[2]['ticket_count']);?>) </span></h4>
+                  <h4><?php echo ($data[2]['City_Name']); ?> <span>(<?php echo ($data[2]['ticket_count']); ?>) </span></h4>
                 </div>
                 <div class="img-box-background">
                   <img class="img-fluid" src="assets/img/cities/<?php echo ($data[2]['City_Id']); ?>.jpg" alt="" />
@@ -178,7 +178,7 @@ array_push($data,$row);
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <a href="City_details.php?id=<?php echo ($data[3]['City_Id']); ?>" class="img-box">
                 <div class="img-box-content">
-                <h4><?php echo($data[3]['City_Name']);?> <span>(<?php echo($data[3]['ticket_count']);?>) </span></h4>
+                  <h4><?php echo ($data[3]['City_Name']); ?> <span>(<?php echo ($data[3]['ticket_count']); ?>) </span></h4>
                 </div>
                 <div class="img-box-background">
                   <img class="img-fluid" src="assets/img/cities/<?php echo ($data[3]['City_Id']); ?>.jpg" alt="" />
@@ -188,7 +188,7 @@ array_push($data,$row);
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <a href="City_details.php?id=<?php echo ($data[4]['City_Id']); ?>" class="img-box">
                 <div class="img-box-content">
-                <h4><?php echo($data[4]['City_Name']);?> <span>(<?php echo($data[4]['ticket_count']);?>) </span></h4>
+                  <h4><?php echo ($data[4]['City_Name']); ?> <span>(<?php echo ($data[4]['ticket_count']); ?>) </span></h4>
                 </div>
                 <div class="img-box-background">
                   <img class="img-fluid" src="assets/img/cities/<?php echo ($data[4]['City_Id']); ?>.jpg" alt="" />
@@ -200,17 +200,17 @@ array_push($data,$row);
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
           <a href="City_details.php?id=<?php echo ($data[5]['City_Id']); ?>" class="img-box">
             <div class="img-box-content">
-            <h4><?php echo($data[5]['City_Name']);?> <span>(<?php echo($data[5]['ticket_count']);?>) </span></h4>
+              <h4><?php echo ($data[5]['City_Name']); ?> <span>(<?php echo ($data[5]['ticket_count']); ?>) </span></h4>
             </div>
             <div class="img-box-background">
-              <img class="img-fluid" src="assets/img/cities/<?php echo ($data[5]['City_Id']); ?>.jpg" alt="" />
+              <img class="img-fluid" src="assets/img/cities/<?php echo ($data[5]['City_Id']); ?>L.jpg" alt="" />
             </div>
           </a>
         </div>
       </div>
     </div>
   </section>
-
+  <!-- how it works section  -->
   <section class="works section-padding">
     <div class="container">
       <div class="row">
@@ -230,7 +230,7 @@ array_push($data,$row);
             <div class="icon-box">
               <i class="lni-bookmark-alt"></i>
             </div>
-            <p>Rent Slot</p>
+            <p>Select Parking Name</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-xs-12">
@@ -238,7 +238,7 @@ array_push($data,$row);
             <div class="icon-box">
               <i class="lni-thumbs-up"></i>
             </div>
-            <p>Deal Done</p>
+            <p> Book Your Slot</p>
           </div>
         </div>
         <!-- <hr class="works-line" /> -->
@@ -293,23 +293,24 @@ array_push($data,$row);
     </div>
   </div>
 
+  <!-- key service section  -->
   <section class="services section-padding">
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h3 class="section-title">Key Features</h3>
+          <h3 class="section-title">Key Services</h3>
         </div>
 
         <div class="col-md-6 col-lg-4 col-xs-12">
           <div class="services-item wow fadeInRight" data-wow-delay="0.2s">
             <div class="icon">
-              <i class="lni-leaf"></i>
+              <i class="fas fa-parking"></i>
             </div>
             <div class="services-content">
-              <h3><a href="#">Elegant Design</a></h3>
+              <h3><a href="City_details.php?id=1">Parking</a></h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo
-                aut magni perferendis.
+                Park your car in a safe place..
+                book your slot and don't worry about it.
               </p>
             </div>
           </div>
@@ -318,13 +319,13 @@ array_push($data,$row);
         <div class="col-md-6 col-lg-4 col-xs-12">
           <div class="services-item wow fadeInRight" data-wow-delay="0.4s">
             <div class="icon">
-              <i class="lni-display"></i>
+              <i class="fas fa-route"></i>
             </div>
             <div class="services-content">
-              <h3><a href="#">Responsive Design</a></h3>
+              <h3><a href="#">Delivery</a></h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo
-                aut magni perferendis.
+                we can deliver the car to you at any place
+                just select delivery.
               </p>
             </div>
           </div>
@@ -333,58 +334,13 @@ array_push($data,$row);
         <div class="col-md-6 col-lg-4 col-xs-12">
           <div class="services-item wow fadeInRight" data-wow-delay="0.6s">
             <div class="icon">
-              <i class="lni-color-pallet"></i>
+              <i class="fab fa-resolving"></i>
             </div>
             <div class="services-content">
-              <h3><a href="#">Clean UI</a></h3>
+              <h3><a href="#">Rent</a></h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo
-                aut magni perferendis.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4 col-xs-12">
-          <div class="services-item wow fadeInRight" data-wow-delay="0.8s">
-            <div class="icon">
-              <i class="lni-emoji-smile"></i>
-            </div>
-            <div class="services-content">
-              <h3><a href="#">UX Friendly</a></h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo
-                aut magni perferendis.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4 col-xs-12">
-          <div class="services-item wow fadeInRight" data-wow-delay="1s">
-            <div class="icon">
-              <i class="lni-pencil-alt"></i>
-            </div>
-            <div class="services-content">
-              <h3><a href="#">Easily Customizable</a></h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo
-                aut magni perferendis.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4 col-xs-12">
-          <div class="services-item wow fadeInRight" data-wow-delay="1.2s">
-            <div class="icon">
-              <i class="lni-headphone-alt"></i>
-            </div>
-            <div class="services-content">
-              <h3><a href="#">Security Support</a></h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo
-                aut magni perferendis.
+                select car you want and set the date and time
+                and start your trip.
               </p>
             </div>
           </div>
@@ -393,6 +349,7 @@ array_push($data,$row);
     </div>
   </section>
 
+  <!-- pricing plane section -->
   <section id="pricing-table" class="section-padding">
     <div class="container">
       <div class="row">
@@ -402,216 +359,141 @@ array_push($data,$row);
         <div class="col-lg-4 col-md-6 col-xs-12">
           <div class="table">
             <div class="icon">
-              <i class="lni-gift"></i>
+              <i class="fas fa-parking"></i>
             </div>
             <div class="pricing-header">
-              <p class="price-value">$29</p>
+              <p class="price-value">10 EGP</p>
             </div>
             <div class="title">
-              <h3>Basic</h3>
+              <h3>Parking</h3>
             </div>
             <ul class="description">
-              <li>Free ad posting</li>
-              <li>No Featured ads availability</li>
-              <li>Access to limited features</li>
-              <li>For 30 days</li>
+              <li> Safe</li>
+              <li>No Car Collision</li>
+              <li>Access to any slot</li>
+              <li>Available 24 Hours</li>
               <li>100% Secure!</li>
             </ul>
-            <button class="btn btn-common">Purchase</button>
+            <button class="btn btn-common"><a href="City_details.php?id=1" style="color:white">Book Now</a> </button>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-xs-12">
           <div class="table" id="active-tb">
             <div class="icon">
-              <i class="lni-leaf"></i>
+              <i class="fas fa-route"></i>
             </div>
             <div class="pricing-header">
-              <p class="price-value">$49</p>
+              <p class="price-value">100 EGP</p>
             </div>
             <div class="title">
-              <h3>Standard</h3>
+              <h3>Delivery</h3>
             </div>
             <ul class="description">
-              <li>Free ad posting</li>
-              <li>10 Featured ads availability</li>
-              <li>Access to unlimited features</li>
-              <li>For 30 days</li>
+              <li>deliver to you</li>
+              <li>set your place</li>
+              <li>deliver to any place</li>
+              <li>Available 24 Hours</li>
               <li>100% Secure!</li>
             </ul>
-            <button class="btn btn-common">Purchase</button>
+            <button class="btn btn-common"> <a href="City_details.php?id=1" style="color:white">Purchase </a> </button>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 col-xs-12">
           <div class="table">
             <div class="icon">
-              <i class="lni-layers"></i>
+              <i class="fab fa-resolving"></i>
             </div>
             <div class="pricing-header">
-              <p class="price-value">$69</p>
+              <p class="price-value">500 EGP</p>
             </div>
             <div class="title">
-              <h3>Premium</h3>
+              <h3>Rent</h3>
             </div>
             <ul class="description">
-              <li>Free ad posting</li>
-              <li>100 Featured ads availability</li>
-              <li>Access to unlimited features</li>
-              <li>For 30 days</li>
+              <li>Select The Car</li>
+              <li>Set The Time</li>
+              <li>Enjoy</li>
+              <li>Available 24 Hours</li>
               <li>100% Secure!</li>
             </ul>
-            <button class="btn btn-common">Purchase</button>
+            <button class="btn btn-common"> <a href="City_details.php?id=1" style="color:white"> Rent Now </a></button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- counter section  -->
   <section class="counter-section section-padding">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-6 work-counter-widget">
           <div class="counter">
-            <div class="icon"><i class="lni-layers"></i></div>
+            <div class="icon"> <i class="fas fa-parking"></i> </div>
             <h2 class="counterUp">8325</h2>
-            <p>Ad Posted</p>
+            <p>Parking</p>
           </div>
         </div>
 
         <div class="col-md-3 col-sm-6 work-counter-widget">
           <div class="counter">
             <div class="icon"><i class="lni-users"></i></div>
-            <h2 class="counterUp">5487</h2>
+            <h2 class="counterUp">8325</h2>
             <p>Members</p>
           </div>
         </div>
 
         <div class="col-md-3 col-sm-6 work-counter-widget">
           <div class="counter">
-            <div class="icon"><i class="lni-briefcase"></i></div>
-            <h2 class="counterUp">2012</h2>
-            <p>Premium Ads</p>
+            <div class="icon"><i class="fab fa-resolving"></i></div>
+            <h2 class="counterUp">2456</h2>
+            <p>Rent</p>
           </div>
         </div>
 
         <div class="col-md-3 col-sm-6 work-counter-widget">
           <div class="counter">
-            <div class="icon"><i class="lni-map"></i></div>
-            <h2 class="counterUp">200</h2>
-            <p>Locations</p>
+            <div class="icon"><i class="fas fa-route"></i></div>
+            <h2 class="counterUp">274</h2>
+            <p>Delivery</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- board members section  -->
   <section class="testimonial section-padding">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div id="testimonials" class="owl-carousel">
-            <div class="item">
-              <div class="img-thumb">
-                <img src="assets/img/testimonial/img1.png" alt="" />
-              </div>
-              <div class="testimonial-item">
-                <div class="content">
-                  <p class="description">
-                    Eiusmod tempor incidiunt labore velit dolore magna aliqu
-                    sed eniminim veniam quis nostrud exercition eullamco
-                    laborisaa, Eiusmod tempor incidiunt labore velit dolore
-                    magna.
-                  </p>
-                  <div class="info-text">
-                    <h2><a href="#">Josh Rossi</a></h2>
-                    <h4><a href="#">CEO of Fiverr</a></h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
+            <?php
+
+            $members = $offer->BoardMember();
+            while ($member = mysqli_fetch_assoc($members)) {
+
+
+            ?>
               <div class="item">
                 <div class="img-thumb">
-                  <img src="assets/img/testimonial/img2.png" alt="" />
+                  <img src="assets/img/testimonial/img<?php echo ($member['member_id']); ?>.png" alt="" />
                 </div>
                 <div class="testimonial-item">
                   <div class="content">
                     <p class="description">
-                      Eiusmod tempor incidiunt labore velit dolore magna aliqu
-                      sed eniminim veniam quis nostrud exercition eullamco
-                      laborisaa, Eiusmod tempor incidiunt labore velit dolore
-                      magna.
+                      <?php echo ($member['description']); ?>
+
                     </p>
                     <div class="info-text">
-                      <h2><a href="#">Jessica</a></h2>
-                      <h4><a href="#">CEO of Dropbox</a></h4>
+                      <h2><a href="#"><?php echo ($member['member_name']); ?></a></h2>
+                      <h4><a href="#"><?php echo ($member['position']); ?></a></h4>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="item">
-              <div class="item">
-                <div class="img-thumb">
-                  <img src="assets/img/testimonial/img3.png" alt="" />
-                </div>
-                <div class="testimonial-item">
-                  <div class="content">
-                    <p class="description">
-                      Eiusmod tempor incidiunt labore velit dolore magna aliqu
-                      sed eniminim veniam quis nostrud exercition eullamco
-                      laborisaa, Eiusmod tempor incidiunt labore velit dolore
-                      magna.
-                    </p>
-                    <div class="info-text">
-                      <h2><a href="#">Johnny Zeigler</a></h2>
-                      <h4><a href="#">CEO of Fiverr</a></h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="item">
-                <div class="img-thumb">
-                  <img src="assets/img/testimonial/img4.png" alt="" />
-                </div>
-                <div class="testimonial-item">
-                  <div class="content">
-                    <p class="description">
-                      Eiusmod tempor incidiunt labore velit dolore magna aliqu
-                      sed eniminim veniam quis nostrud exercition eullamco
-                      laborisaa, Eiusmod tempor incidiunt labore velit dolore
-                      magna.
-                    </p>
-                    <div class="info-text">
-                      <h2><a href="#">Josh Rossi</a></h2>
-                      <h4><a href="#">CEO of Fiverr</a></h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="item">
-                <div class="img-thumb">
-                  <img src="assets/img/testimonial/img5.png" alt="" />
-                </div>
-                <div class="testimonial-item">
-                  <div class="content">
-                    <p class="description">
-                      Eiusmod tempor incidiunt labore velit dolore magna aliqu
-                      sed eniminim veniam quis nostrud exercition eullamco
-                      laborisaa, Eiusmod tempor incidiunt labore velit dolore
-                      magna.
-                    </p>
-                    <div class="info-text">
-                      <h2><a href="#">Priyanka</a></h2>
-                      <h4><a href="#">CEO of Dropbox</a></h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <?php  } ?>
+
           </div>
         </div>
       </div>
@@ -696,6 +578,83 @@ array_push($data,$row);
       </div>
     </div>
   </section> -->
+<!-- most booked parking  -->
+  <section id="blog" class="section-padding">
+    <div class="container">
+      <h2 class="section-title">
+        Parking
+      </h2>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
+          <div class="blog-item-wrapper">
+            <div class="blog-item-img">
+              <a href="City_details.php?id=1">
+                <img src="assets/img/parks/1.jpg" alt="" />
+              </a>
+            </div>
+            <div class="blog-item-text">
+              <div class="meta-tags">
+                <span class="user float-left"><i class="lni-calendar"></i> Opened At 24 Narch, 2020</span>
+              </div>
+              <h3>
+                <a href="City_details.php?id=1">Recently Launching Nasr City Branch</a>
+              </h3>
+              <p>
+                Reprehenderit nemo quod tempore doloribus ratione distinctio
+                quis quidem vitae sunt reiciendis, molestias omnis soluta.
+              </p>
+              <a href="City_details.php?id=1" class="btn btn-common">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
+          <div class="blog-item-wrapper">
+            <div class="blog-item-img">
+              <a href="City_details.php?id=2">
+                <img src="assets/img/parks/2.jpg" alt="" />
+              </a>
+            </div>
+            <div class="blog-item-text">
+              <div class="meta-tags">
+                <span class="user float-left"><i class="lni-calendar"></i> Opened At 24 May, 2016</span>
+              </div>
+              <h3>
+                <a href="City_details.php?id=2"> Zayed Parking</a>
+              </h3>
+              <p>
+                Reprehenderit nemo quod tempore doloribus ratione distinctio
+                quis quidem vitae sunt reiciendis, molestias omnis soluta.
+              </p>
+              <a href="City_details.php?id=2" class="btn btn-common">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
+          <div class="blog-item-wrapper">
+            <div class="blog-item-img">
+              <a href="City_details.php?id=3">
+                <img src="assets/img/parks/3.jpg" alt="" />
+              </a>
+            </div>
+            <div class="blog-item-text">
+              <div class="meta-tags">
+                <span class="user float-left"><i class="lni-calendar"></i> Opened At 24 May, 2018</span>
+
+              </div>
+              <h3>
+                <a href="City_details.php?id=3">Maadi Parking</a>
+              </h3>
+              <p>
+                Reprehenderit nemo quod tempore doloribus ratione distinctio
+                quis quidem vitae sunt reiciendis, molestias omnis soluta.
+              </p>
+              <a href="City_details.php?id=3" class="btn btn-common">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="subscribes section-padding">
     <div class="container">
