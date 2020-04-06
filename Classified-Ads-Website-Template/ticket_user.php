@@ -156,22 +156,22 @@ include_once "Ticket.php";
                 <h2 class="page-title"><?php echo ($row['Parking_Name']); ?></h2>
               </div>
 
-              <div class="ticket-body col-lg-9 col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
-                <div class="row mb-3">
-                  <div class="col-12 mb-3">
+              <div class="ticket-body col-12 col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+                <div class="row mb-3 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3">
                     <strong> <?php echo ($row['Parking_Name']); ?></strong>
                   </div>
 
-                  <div class="col-lg-5">
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <p>
                       <span> Owner ID / <?php echo ($_SESSION['user'] . '--' . $_SESSION['id']); ?></span>
                       <br />
-                      <span> <?php echo $_SESSION['selected_car_number']; ?></span>
+                      <span> car Number:<?php echo $_SESSION['selected_car_number']; ?></span>
                       <br />
-                      <span> <?php echo ($info['Phone_Number']); ?> </span>
+                      <span>Phone Number: <?php echo ($info['Phone_Number']); ?> </span>
                     </p>
                   </div>
-                  <div class="col-lg-5 col-xs-6 col-sm-6 col-md-6 text-right">
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 text-right">
                     <p>
                       <span>Date: <?php
                                   $reservation_date = date("Y/m/d h:i:s");
@@ -181,9 +181,9 @@ include_once "Ticket.php";
                     </p>
                   </div>
                 </div>
-                <div class="row pt-3">
-                  <form method="POST">
-                    <table class="table ">
+                <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pt-3">
+                  <form method="POST" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table class="table col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                       <thead>
                         <tr>
                           <th scope="col">service</th>
@@ -216,21 +216,21 @@ include_once "Ticket.php";
 
                       ?>
                     </table>
-                    <div class="col-lg-12 text-center">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
                       <span>
                         <strong> You Are Welcomed At Any Time </strong></span>
                     </div>
                 </div>
               </div>
               <div class="post-btn mb-3 mt-3 col-lg-9 text-center">
-                <a class="btn btn-common" href="editBooking.html">
+                <a class="btn btn-common" href="booking.php?id=<?php echo $_GET['id'] ?>">
                   <i class="lni-pencil-alt"></i> Edit Your Booking
                 </a>
                 <button type="button" class="btn btn-common" data-toggle="modal" data-target="#exampleModal">
                   Confirm Your Booking
                 </button>
 
-                <!--Delete Modal -->
+                <!--Confirmation Modal -->
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -275,20 +275,20 @@ include_once "Ticket.php";
                 $ticket->setDateFrom($_SESSION['selected_date_from']);
                 $ticket->setDateTo($_SESSION['selected_date_to']);
                 $msg = $ticket->Add();
-               
+
 
 
                 if ($msg == 'ok') {
 
-                  $last_ticket= $ticket->MaxTicket();
-                  $max_ticket=mysqli_fetch_assoc($last_ticket);
+                  $last_ticket = $ticket->MaxTicket();
+                  $max_ticket = mysqli_fetch_assoc($last_ticket);
 
-                $Qrcode_data='ticket_code:'.$max_ticket['last_ticket'].
-                'date time from:('.$_SESSION['selected_date_from'].' '.$_SESSION['selected_time_from'].')'.
-                'date time to:('.$_SESSION['selected_date_to'].' '.$_SESSION['selected_time_to'].')'.
-                'user-name:'.$_SESSION['user'].
-                ' parking_code:'.$_GET['id'].
-                'slot_code:'.$_SESSION['slot_id'];
+                  $Qrcode_data = 'ticket_code:' . $max_ticket['last_ticket'] .
+                    'date time from:(' . $_SESSION['selected_date_from'] . ' ' . $_SESSION['selected_time_from'] . ')' .
+                    'date time to:(' . $_SESSION['selected_date_to'] . ' ' . $_SESSION['selected_time_to'] . ')' .
+                    'user-name:' . $_SESSION['user'] .
+                    ' parking_code:' . $_GET['id'] .
+                    'slot_code:' . $_SESSION['slot_id'];
 
                   //set it to writable location, a place for temp generated PNG files
                   $PNG_TEMP_DIR = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'temp' . DIRECTORY_SEPARATOR;
@@ -311,18 +311,18 @@ include_once "Ticket.php";
                   $matrixPointSize = 4;
 
 
-                    //it's very important!
-                    if (trim($Qrcode_data) == '')
-                      die('data cannot be empty! <a href="?">back</a>');
+                  //it's very important!
+                  if (trim($Qrcode_data) == '')
+                    die('data cannot be empty! <a href="?">back</a>');
 
-                    // user data
-                    $filename = $PNG_TEMP_DIR . $max_ticket['last_ticket'] . '.png';
-                    QRcode::png($Qrcode_data, $filename, $errorCorrectionLevel, $matrixPointSize, 2);
-                  
+                  // user data
+                  $filename = $PNG_TEMP_DIR . $max_ticket['last_ticket'] . '.png';
+                  QRcode::png($Qrcode_data, $filename, $errorCorrectionLevel, $matrixPointSize, 2);
+
 
                   //display generated file
                   echo '<div><img  src="' . $PNG_WEB_DIR . basename($filename) . '" /></div>
-                       <div> <a target="_blank" class="btn btn-common" href="http://localhost:8888/Classified-Ads-Website-Template/Parking_Web_Native/Classified-Ads-Website-Template/temp/'.$max_ticket['last_ticket'].'.png" > open QR code</a></div>';
+                       <div> <a target="_blank" class="btn btn-common" href="http://localhost/project/Parking_Web_Native-master/Classified-Ads-Website-Template/temp/' . $max_ticket['last_ticket'] . '.png" > open QR code</a></div>';
 
                   echo ('<br><br><h3 class="alert alert-success">you have booked successfully come on time</h3>');
                 } else {

@@ -66,8 +66,8 @@ include "headerAfter.php";
               </div>
               <div class="form-group mt-4">
                 <ul class="form-links">
-                  <li class="float-left"><a href="register.php">Don't have an account?</a></li>
-                  <li class="float-right"><a href="login.php">Back to Login</a></li>
+                  <li class="float-left"><a href="profile.php">Back to Profile</a></li>
+                  <li class="float-right"><a href="index.php">Back to Home</a></li>
             
                 </ul>
               </div>

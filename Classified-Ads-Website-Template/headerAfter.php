@@ -102,7 +102,7 @@ if (isset($_SESSION['user'])) {
             <span class="lni-menu"></span>
             <span class="lni-menu"></span>
           </button>
-          <a href="indexuser.php" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a>
+          <a href="index.php" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a>
         </div>
         <div class="collapse navbar-collapse" id="main-navbar">
           <ul class="navbar-nav mr-auto w-100 justify-content-center">

@@ -10,7 +10,7 @@ include "header.php";
           <div class="breadcrumb-wrapper">
             <h2 class="product-title">Login</h2>
             <ol class="breadcrumb">
-              <li><a href="indexUser.php">Home /</a></li>
+              <li><a href="index.php">Home /</a></li>
               <li class="current">Login</li>
             </ol>
           </div>
@@ -30,7 +30,7 @@ include "header.php";
             </h3>
             <?php
             if(isset($_COOKIE['usercookie'])){				
-              header('location:indexUser.php');
+              header('location:index.php');
             }	
             if (isset($_POST['log'])) {
             
@@ -51,7 +51,7 @@ include "header.php";
 
                 $_SESSION['user']=$row['Name'];
                 $_SESSION['id']=$row['Owner_Id'];
-                header('location:indexUser.php');
+                header('location:index.php');
             }else {
               echo("<h3 class='alert alert-danger'> Error Email Or password</h3>");
             }

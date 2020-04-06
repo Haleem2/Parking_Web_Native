@@ -83,6 +83,11 @@ class City extends Database implements operations
 
   }
 
+  public function Most_visited(){
+
+    $data = parent::CheckData('SELECT * FROM view_count_ticket LIMIT 6 ');
+    return $data;
+  }
 
 }
 ?>

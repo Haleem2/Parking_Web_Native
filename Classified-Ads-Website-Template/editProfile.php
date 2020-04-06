@@ -10,7 +10,7 @@ include "headerAfter.php";
           <div class="breadcrumb-wrapper">
             <h2 class="product-title">Login</h2>
             <ol class="breadcrumb">
-              <li><a href="indexUser.php">Home /</a></li>
+              <li><a href="index.php">Home /</a></li>
               <li class="current">My Profile</li>
             </ol>
           </div>

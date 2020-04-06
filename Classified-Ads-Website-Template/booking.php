@@ -163,21 +163,21 @@ include_once "City.php";
             <div class="container">
               <h4 class="page-title"><?php echo ($row['Parking_Name']); ?></h4>
               <div class="row">
-                <div class=" con-div col-lg-12 col-md-6 col-sm-6">
+                <div class=" con-div col-lg-12 col-md-12 col-sm-12">
                   <div class="container">
-                    <div class="row">
+                    <div class="row col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12">
                       <!-- select service form  -->
-                      <form class="col-lg-12 m-3">
+                      <form class="row col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12 my-3">
                         <label class="select-service">Select Service</label>
-                        <div class=" form-group m-2">
-                          <select class=" m-3 custom-select form-control col-lg-11 select-ticket" id="servie-type-field">
+                        <div class=" form-group my-2 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                          <select class=" m-3 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 custom-select form-control select-ticket" id="servie-type-field">
                             <option selected> select ticket type</option>
                             <option value="parking">Parking</option>
                             <option value="delivery">Delivery</option>
                             <option value="rent">Rent</option>
                           </select>
                         </div>
-                        <div class="col-lg-12 text-right">
+                        <div class="form-group my-2 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right">
                           <input type="submit" class="btn submit-service-type submit-ticket">
                         </div>
                       </form>
@@ -188,31 +188,31 @@ include_once "City.php";
                         
                         if ($count['ticket_count'] < 2) {
                         ?>
-                          <form class="col-lg-12 m-3 row service-type-parking-time-form" data-parking="<?php echo ($_GET['id']); ?>">
+                          <form class="row col-12 col-lg-12 col-md-12 col-sm-12 my-3 service-type-parking-time-form" data-parking="<?php echo ($_GET['id']); ?>">
                             <label class="col-1">From</label>
-                            <div class="form-row show-inputbtns col-lg-6 offset-1 mb-2">
+                            <div class="form-row show-inputbtns col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 offset-1 mb-2">
                               <input required name="date_from" type="date" data-date-inline-picker="false" class="form-control" data-date-open-on-focus="true" />
                             </div>
 
-                            <div class="form-row show-inputbtns col-lg-5 mb-2">
+                            <div class="form-row show-inputbtns col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 mb-2">
                               <input required name="time_from" type="time" name="time" step="900" class="form-control" />
                             </div>
 
                             <label class="col-1">To</label>
-                            <div class="form-row show-inputbtns col-lg-6 offset-1 mb-2">
+                            <div class="form-row show-inputbtns col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 offset-1 mb-2">
                               <input required name="date_to" type="date" data-date-inline-picker="false" class="form-control" data-date-open-on-focus="true" />
                             </div>
 
-                            <div class="form-row show-inputbtns col-lg-5 mb-2">
+                            <div class="form-row show-inputbtns col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 mb-2">
                               <input required name="time_to" type="time" name="time" step="900" class="form-control" />
                             </div>
 
-                            <div class="col-lg-12 text-right">
+                            <div class="col-12 col-lg-12 col-md-12 col-sm-12 text-right">
                               <input type="submit" class=" btn submit-ticket service-type-parking-time" />
                             </div>
                           </form>
                           <!-- rgistiration selected slot form  -->
-                          <form method="POST" action="" class="col-lg-12 m-3 service-type-parking-contents">
+                          <form method="POST" action="" class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 my-3 service-type-parking-contents">
                             <!-- session to store ticket details -->
                             <?php
                             if (isset($_POST['submit_ticket'])) {
@@ -264,7 +264,7 @@ include_once "City.php";
                                       </tr>
                                     <?php } ?>
                                     <label for="carNum" class="select-service" style="font-size: 20px">Select Your Car: </label>
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                       <select class="form-control " name="carNum" required>
                                         <?php while ($carNum = mysqli_fetch_assoc($select_car)) { ?>
                                           <option value="<?php echo ($carNum['Car Number']); ?>"><?php echo ($carNum['Car Number'] . '--' . $carNum['Car Type']); ?></option>
@@ -287,7 +287,7 @@ include_once "City.php";
                       </div>
 
 
-                      <div class="col-lg-9  m-3">
+                      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 m-3">
                         <h3>Our Parking</h3>
                         <p class="Description">
                           <?php echo ($row['Parking_Desc']); ?>
