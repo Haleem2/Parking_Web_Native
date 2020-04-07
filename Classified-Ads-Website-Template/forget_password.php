@@ -15,8 +15,8 @@ session_start();
           <div class="breadcrumb-wrapper">
             <h2 class="product-title">Forgot Password</h2>
             <ol class="breadcrumb">
-              <li><a href="#">Home /</a></li>
-              <li class="current">Forgot Password</li>
+              <li><a href="index.php">Home /</a></li>
+              <li class="current">Forget Password</li>
             </ol>
           </div>
         </div>
@@ -31,7 +31,7 @@ session_start();
         <div class="col-lg-5 col-md-12 col-xs-12">
           <div class="forgot login-area">
             <h3>
-              Forgot Password
+              Forget Password
             </h3>
             <?php
             if (isset($_POST['checkbtn'])) {
@@ -73,7 +73,7 @@ session_start();
                 echo "Mailer Error: " . $mail->ErrorInfo;
             } else {
                 $_SESSION['code']=$activation;
-                echo("<h3 class='alert alert-success'>Message has been sent , check your email </h3>".$_SESSION['code']);
+                echo("<h3 class='alert alert-success'>Message has been sent , check your email </h3>");
             }
             }else {
               echo("<h3 class='alert alert-danger'> Not Registerd Email</h3>");
