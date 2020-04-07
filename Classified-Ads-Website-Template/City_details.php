@@ -17,7 +17,7 @@ if (isset($_SESSION['user'])) {
         <div class="breadcrumb-wrapper">
           <h2 class="product-title">Details</h2>
           <ol class="breadcrumb">
-            <li><a href="#">Home /</a></li>
+            <li><a href="index.php">Home /</a></li>
             <li class="current">Details</li>
           </ol>
         </div>

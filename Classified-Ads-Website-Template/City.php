@@ -89,5 +89,10 @@ class City extends Database implements operations
     return $data;
   }
 
+  public function Most_visited_parking(){
+
+    $data = parent::CheckData('SELECT * FROM `view_count_parking_ticket` LIMIT 3 ');
+    return $data;
+  }
 }
 ?>

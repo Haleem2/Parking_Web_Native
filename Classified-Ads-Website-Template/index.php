@@ -246,7 +246,7 @@ if (isset($_SESSION['user'])) {
     </div>
   </section>
 
-  <div class="call-back section-padding bg-light">
+  <!-- <div class="call-back section-padding bg-light">
     <div class="container">
       <h4>Request a Free Call Back</h4>
       <div class="row">
@@ -291,7 +291,7 @@ if (isset($_SESSION['user'])) {
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- key service section  -->
   <section class="services section-padding">
@@ -500,162 +500,45 @@ if (isset($_SESSION['user'])) {
     </div>
   </section>
 
-  <!-- <section id="blog" class="section-padding">
-    <div class="container">
-      <h2 class="section-title">
-        Blog Post
-      </h2>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-          <div class="blog-item-wrapper">
-            <div class="blog-item-img">
-              <a href="single-post.html">
-                <img src="assets/img/blog/img-1.jpg" alt="" />
-              </a>
-            </div>
-            <div class="blog-item-text">
-              <div class="meta-tags">
-                <span class="user float-left"><a href="#"><i class="lni-user"></i> Posted By Admin</a></span>
-                <span class="date float-right"><i class="lni-calendar"></i> 24 May, 2018</span>
-              </div>
-              <h3>
-                <a href="single-post.html">Recently Launching Our Iphone X</a>
-              </h3>
-              <p>
-                Reprehenderit nemo quod tempore doloribus ratione distinctio
-                quis quidem vitae sunt reiciendis, molestias omnis soluta.
-              </p>
-              <a href="single-post.html" class="btn btn-common">Read More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-          <div class="blog-item-wrapper">
-            <div class="blog-item-img">
-              <a href="single-post.html">
-                <img src="assets/img/blog/img-2.jpg" alt="" />
-              </a>
-            </div>
-            <div class="blog-item-text">
-              <div class="meta-tags">
-                <span class="user float-left"><a href="#"><i class="lni-user"></i> Posted By Admin</a></span>
-                <span class="date float-right"><i class="lni-calendar"></i> 24 May, 2018</span>
-              </div>
-              <h3>
-                <a href="single-post.html">How to get more ad views</a>
-              </h3>
-              <p>
-                Reprehenderit nemo quod tempore doloribus ratione distinctio
-                quis quidem vitae sunt reiciendis, molestias omnis soluta.
-              </p>
-              <a href="single-post.html" class="btn btn-common">Read More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-          <div class="blog-item-wrapper">
-            <div class="blog-item-img">
-              <a href="single-post.html">
-                <img src="assets/img/blog/img-3.jpg" alt="" />
-              </a>
-            </div>
-            <div class="blog-item-text">
-              <div class="meta-tags">
-                <span class="user float-left"><a href="#"><i class="lni-user"></i> Posted By Admin</a></span>
-                <span class="date float-right"><i class="lni-calendar"></i> 24 May, 2018</span>
-              </div>
-              <h3>
-                <a href="single-post.html">Writing a better product description</a>
-              </h3>
-              <p>
-                Reprehenderit nemo quod tempore doloribus ratione distinctio
-                quis quidem vitae sunt reiciendis, molestias omnis soluta.
-              </p>
-              <a href="single-post.html" class="btn btn-common">Read More</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-<!-- most booked parking  -->
+  <!-- most booked parking  -->
   <section id="blog" class="section-padding">
     <div class="container">
       <h2 class="section-title">
         Parking
       </h2>
       <div class="row">
-        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-          <div class="blog-item-wrapper">
-            <div class="blog-item-img">
-              <a href="City_details.php?id=1">
-                <img src="assets/img/parks/1.jpg" alt="" />
-              </a>
-            </div>
-            <div class="blog-item-text">
-              <div class="meta-tags">
-                <span class="user float-left"><i class="lni-calendar"></i> Opened At 24 Narch, 2020</span>
+        <?php
+        $prking_count = $most_visited->Most_visited_parking();
+        while ($parking = mysqli_fetch_assoc($prking_count)) {
+        ?>
+          <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
+            <div class="blog-item-wrapper">
+              <div class="blog-item-img">
+                <a href="City_details.php?<?php echo ($parking['Parking_Id']); ?>">
+                  <img src="assets/img/parks/<?php echo ($parking['Parking_Id']); ?>.jpg" alt="" />
+                </a>
               </div>
-              <h3>
-                <a href="City_details.php?id=1">Recently Launching Nasr City Branch</a>
-              </h3>
-              <p>
-                Reprehenderit nemo quod tempore doloribus ratione distinctio
-                quis quidem vitae sunt reiciendis, molestias omnis soluta.
-              </p>
-              <a href="City_details.php?id=1" class="btn btn-common">Read More</a>
+              <div class="blog-item-text">
+                <h3>
+                  <a href="City_details.php?id=<?php echo ($parking['Parking_Id']); ?>"> <?php echo ($parking['Parking_Name']); ?></a>
+                </h3>
+                <h3>
+                  <span> Tickets In This Branch : <?php echo ($parking['ticket_count']); ?> </span>
+                </h3>
+                <p>
+                  <?php echo ($parking['Desc']); ?>
+                </p>
+                <a href="City_details.php?id=<?php echo ($parking['Parking_Id']); ?>" class="btn btn-common">Read More</a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-          <div class="blog-item-wrapper">
-            <div class="blog-item-img">
-              <a href="City_details.php?id=2">
-                <img src="assets/img/parks/2.jpg" alt="" />
-              </a>
-            </div>
-            <div class="blog-item-text">
-              <div class="meta-tags">
-                <span class="user float-left"><i class="lni-calendar"></i> Opened At 24 May, 2016</span>
-              </div>
-              <h3>
-                <a href="City_details.php?id=2"> Zayed Parking</a>
-              </h3>
-              <p>
-                Reprehenderit nemo quod tempore doloribus ratione distinctio
-                quis quidem vitae sunt reiciendis, molestias omnis soluta.
-              </p>
-              <a href="City_details.php?id=2" class="btn btn-common">Read More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-          <div class="blog-item-wrapper">
-            <div class="blog-item-img">
-              <a href="City_details.php?id=3">
-                <img src="assets/img/parks/3.jpg" alt="" />
-              </a>
-            </div>
-            <div class="blog-item-text">
-              <div class="meta-tags">
-                <span class="user float-left"><i class="lni-calendar"></i> Opened At 24 May, 2018</span>
-
-              </div>
-              <h3>
-                <a href="City_details.php?id=3">Maadi Parking</a>
-              </h3>
-              <p>
-                Reprehenderit nemo quod tempore doloribus ratione distinctio
-                quis quidem vitae sunt reiciendis, molestias omnis soluta.
-              </p>
-              <a href="City_details.php?id=3" class="btn btn-common">Read More</a>
-            </div>
-          </div>
-        </div>
+        <?php
+        }
+        ?>
       </div>
     </div>
   </section>
-
+  <!-- subscribe section  -->
   <section class="subscribes section-padding">
     <div class="container">
       <div class="row">
@@ -666,7 +549,7 @@ if (isset($_SESSION['user'])) {
             </div>
             <div class="sub-text">
               <h3>Subscribe to Newsletter</h3>
-              <p>and receive new ads in inbox</p>
+              <p>and receive new offers in inbox</p>
             </div>
           </div>
         </div>
