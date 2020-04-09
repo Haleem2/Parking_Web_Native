@@ -64,7 +64,7 @@ session_start();
               $mail->setFrom('yourmobileapp2017@gmail.com', 'NTI');
               $mail->addAddress($_POST['emailph'], "nn");
           
-              
+            
               $mail->Subject = 'Forget Password Parking online NTI';
               $mail->Body = "Dear , Your Activation Code is : <strong>".$activation ."</strong> <br>please  visit this link: ".$link;
 
