@@ -76,5 +76,6 @@ include "headerAfter.php";
     </div>
   </section>
 <?php
+include_once "contactLinksBar.php";
 include "footer.php";
 ?>
