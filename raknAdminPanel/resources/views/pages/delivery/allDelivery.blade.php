@@ -45,7 +45,7 @@
                         <td>{{$del->location}}</td>
                         <td>{{$del->time}}</td>
                         <td>{{$del->carno}}</td>
-                        <td>{{$del->carowner}}</td>
+                        <td>{{$del->username}}</td>
                         <td>{{$del->cartype}}</td>
                         <td>{{$del->employeename}}</td>
                         <td>{{$del->employeephone}}</td>

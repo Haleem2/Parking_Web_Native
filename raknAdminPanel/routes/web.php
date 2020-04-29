@@ -13,8 +13,8 @@ use App\User;
 |
 */
 
-Route::get('/home', function () {
-    return view('home');
+Route::get('/', function () {
+    return view('auth.login');
 });
 
 Auth::routes();

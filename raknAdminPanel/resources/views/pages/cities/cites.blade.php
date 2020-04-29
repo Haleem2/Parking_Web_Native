@@ -29,7 +29,7 @@
         @else
           @foreach($cites as $city)
             <div class="card ">
-              <img src="{{asset('img/'.$city->image)}}" class="card-img-top">
+              <img src="{{asset('public/img/'.$city->image)}}" class="card-img-top">
               <div class="card-body">
                 <h4 class="card-title mb-2">{{$city->City_Name}}</h4>
                 <p class="card-text">{{$city->Description}}</p>
