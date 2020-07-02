@@ -323,7 +323,7 @@ include_once "Ticket.php";
 
                   //display generated file
                   echo '<div><img  src="' . $PNG_WEB_DIR . basename($filename) . '" /></div>
-                       <div> <a target="_blank" class="btn btn-common" href="http://localhost:8888/Rakna/temp/' . $max_ticket['last_ticket'] . '.png" > open QR code</a></div>';
+                       <div> <a target="_blank" class="btn btn-common" href="http://localhost:8888/Classified-Ads-Website-Template/Parking_Web_Native/Rakna/temp/' . $max_ticket['last_ticket'] . '.png" > open QR code</a></div>';
 
                   echo ('<br><br><h3 class="alert alert-success">you have booked successfully come on time</h3>');
                 } else {
