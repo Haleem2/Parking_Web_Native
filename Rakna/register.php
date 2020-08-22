@@ -77,203 +77,200 @@ include "header.php";
 
 
 <section class="register section-padding">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-12 col-xs-12">
-          <div class="register-form login-area">
-            <?php
-            include_once "Car Owner.php";
-            $owner = new Car_Owner();
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-12 col-xs-12">
+        <div class="register-form login-area">
+          <?php
+          include_once "Car Owner.php";
+          $owner = new Car_Owner();
 
-            $queryResults = [];
-            $carMsgList = [];
-            if (isset($_POST['submit'])) {
-              if (isset($_POST['chkterms'])) {
-                if ($_POST['password']==$_POST['repassword']) {
-                  $reg="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!#%*?&])[A-Za-z\d@$!#%*?&]{8,}$/";
-                  if (preg_match($reg,$_POST['password'])) {
+          $queryResults = [];
+          $carMsgList = [];
+          if (isset($_POST['submit'])) {
+            if (isset($_POST['chkterms'])) {
+              if ($_POST['password'] == $_POST['repassword']) {
+                $reg = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!#%*?&])[A-Za-z\d@$!#%*?&]{8,}$/";
+                if (preg_match($reg, $_POST['password'])) {
 
-                    $owner->setName($_POST['name']);
-                    $owner->setPassword($_POST['password']);
-                    $owner->setPhoneNum($_POST['phone']);
-                    $owner->setAddress($_POST['address']);
-                    $owner->setEmail($_POST['email']);
-  
+                  $owner->setName($_POST['name']);
+                  $owner->setPassword($_POST['password']);
+                  $owner->setPhoneNum($_POST['phone']);
+                  $owner->setAddress($_POST['address']);
+                  $owner->setEmail($_POST['email']);
+
                   mysqli_query($owner->conn, "SET AUTOCOMMIT=0");
                   mysqli_query($owner->conn, "START TRANSACTION");
-                    
-                  $msg= $owner->Add();
-      
+
+                  $msg = $owner->Add();
+
                   array_push($queryResults, $msg);
-                  if ($msg=="ok") {
+                  if ($msg == "ok") {
 
-                      $d=$owner->GetDataByPhone();
-                      $row=mysqli_fetch_assoc($d);
-                      $id=$row['Owner_Id'];
+                    $d = $owner->GetDataByPhone();
+                    $row = mysqli_fetch_assoc($d);
+                    $id = $row['Owner_Id'];
 
-                      $carMsg='';
-                      $car_color=[];
-                      $car_model=[];
-                      $car_num=[];
-                      $car_license=[];
+                    $carMsg = '';
+                    $car_color = [];
+                    $car_model = [];
+                    $car_num = [];
+                    $car_license = [];
 
-                      if (isset($_POST['lstCarNum'])) {
-                        $car_num=$_POST['lstCarNum'];
-                        $car_color=$_POST['lstCarColor'];
-                        $car_model=$_POST['lstCarModel'];
-                        $car_license=$_POST['lstCarLisence'];
-    
-                        for ($i=0; $i < count($car_color) ; $i++) { 
-                          if (isset($car_num[$i]) && isset($car_model[$i]) && isset($car_license[$i]) && isset($car_color[$i])) {
-                            $owner->setID($id);
-                            $owner->setCarNum($car_num[$i]);
-                            $owner->setCarType($car_model[$i]);
-                            $owner->setCarLicesnse($car_license[$i]);
-                            $owner->setCarColor($car_color[$i]);
-                            $carMsg=$owner->AddCar();
-                            array_push($carMsgList, $carMsg);
-                            array_push($queryResults, $carMsg);  
-                          }
+                    if (isset($_POST['lstCarNum'])) {
+                      $car_num = $_POST['lstCarNum'];
+                      $car_color = $_POST['lstCarColor'];
+                      $car_model = $_POST['lstCarModel'];
+                      $car_license = $_POST['lstCarLisence'];
+
+                      for ($i = 0; $i < count($car_color); $i++) {
+                        if (isset($car_num[$i]) && isset($car_model[$i]) && isset($car_license[$i]) && isset($car_color[$i])) {
+                          $owner->setID($id);
+                          $owner->setCarNum($car_num[$i]);
+                          $owner->setCarType($car_model[$i]);
+                          $owner->setCarLicesnse($car_license[$i]);
+                          $owner->setCarColor($car_color[$i]);
+                          $carMsg = $owner->AddCar();
+                          array_push($carMsgList, $carMsg);
+                          array_push($queryResults, $carMsg);
                         }
                       }
+                    }
 
-                      // var_dump($carMsgList);die;
-                      if (!(count(array_unique($carMsgList)) === 1 && end($carMsgList) === 'ok')) {
-                        echo("<h3 class='alert alert-danger'> " . implode(',', $carMsgList) . "</h3>");
-                      }
-
-                  }else if(strpos($msg,"UQphone")){
-                    echo("<h3 class='alert alert-danger'> Sorry this phone is used</h3>");
-                  }else if(strpos($msg,"UQemail")){
-                    echo("<h3 class='alert alert-danger'> Sorry this mail is used</h3>");
-                  }                  
-                }  else {
-                  echo("<h3 class='alert alert-danger'>Sorry Password is Weak</h3> <h5 class='alert alert-danger'>Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special characte</h5>");
-
+                    // var_dump($carMsgList);die;
+                    if (!(count(array_unique($carMsgList)) === 1 && end($carMsgList) === 'ok')) {
+                      echo ("<h3 class='alert alert-danger'> " . implode(',', $carMsgList) . "</h3>");
+                    }
+                  } else if (strpos($msg, "UQphone")) {
+                    echo ("<h3 class='alert alert-danger'> Sorry this phone is used</h3>");
+                  } else if (strpos($msg, "UQemail")) {
+                    echo ("<h3 class='alert alert-danger'> Sorry this mail is used</h3>");
+                  }
+                } else {
+                  echo ("<h3 class='alert alert-danger'>Sorry Password is Weak</h3> <h5 class='alert alert-danger'>Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special characte</h5>");
                 }
-
-              }else{
-                echo("<h3 class='alert alert-danger'>Sorry Not Matched Password</h3>");
+              } else {
+                echo ("<h3 class='alert alert-danger'>Sorry Not Matched Password</h3>");
               }
-            }else{
-              echo("<h3 class='alert alert-danger'>Please accept our terms</h3>");
+            } else {
+              echo ("<h3 class='alert alert-danger'>Please accept our terms</h3>");
             }
 
-            
+
             if (count(array_unique($queryResults)) === 1 && end($queryResults) === 'ok') {
-              echo("<h3 class='alert alert-success'> Regisitration done</h3>");
+              echo ("<h3 class='alert alert-success'> Regisitration done</h3>");
               header("Refresh:5 url=login.php");
               mysqli_query($owner->conn, "COMMIT");
             } else {
-              echo("<h3 class='alert alert-danger'> " . implode(',', $queryResults) . "</h3>");
+              echo ("<h3 class='alert alert-danger'> " . implode(',', $queryResults) . "</h3>");
               mysqli_query($owner->conn, "ROLLBACK");
             }
           }
 
-        ?>
-            <h3>
-              Register
-            </h3>
-            <form class="login-form" method="post">
-              <div class="form-group">
-                <div class="input-icon">
-                  <i class="lni-user"></i>
-                  <input type="text" id="" required class="form-control" name="name" placeholder="Username">
-                </div>
+          ?>
+          <h3>
+            Register
+          </h3>
+          <form class="login-form" method="post">
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="lni-user"></i>
+                <input type="text" id="" required class="form-control" name="name" placeholder="Username">
               </div>
-              <div class="form-group">
-                <div class="input-icon">
-                  <i class="lni-user"></i>
-                  <input type="number" id="" required class="form-control" name="phone" placeholder="phone Number">
-                </div>
+            </div>
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="lni-user"></i>
+                <input type="number" id="" required class="form-control" name="phone" placeholder="phone Number">
               </div>
-              <div class="form-group row">
-                <div class="col">
+            </div>
+            <div class="form-group row">
+              <div class="col">
 
-                  <input type="text" id="carNum"  class="form-control" name="CarNum" placeholder="Car Number"> 
-                </div>
-                <div class="col">
+                <input type="text" id="carNum" class="form-control" name="CarNum" placeholder="Car Number">
+              </div>
+              <div class="col">
 
-                  <input type="text" id="carColor"  class="form-control" name="carColor" placeholder="Car Color"> 
-                </div>
-                <div class=" col">
-                  
-                  <input type="text" id="carLiesence"  class="form-control" name="carLiesence" placeholder="Car License Num"> 
-                </div>
-                <div class=" col">
-                  
-                  <input type="text" id="carModel"  class="form-control" name="carModel" placeholder="Car Model"> 
-                </div>
+                <input type="text" id="carColor" class="form-control" name="carColor" placeholder="Car Color">
               </div>
+              <div class=" col">
+
+                <input type="text" id="carLiesence" class="form-control" name="carLiesence" placeholder="Car License Num">
+              </div>
+              <div class=" col">
+
+                <input type="text" id="carModel" class="form-control" name="carModel" placeholder="Car Model">
+              </div>
+            </div>
 
 
-              <div class="form-group row">
-                <div class="col">
-                  <select name="lstCarNum[]" id="carNumOpt" multiple    size="4" class="form-control">
+            <div class="form-group row">
+              <div class="col">
+                <select name="lstCarNum[]" id="carNumOpt" multiple size="4" class="form-control">
 
-                  </select>
-                </div>
-                <div class="col">
-                  <select name="lstCarColor[]" id="carColorOpt" multiple   size="4" class="form-control">
-                    
-                  </select>
-                </div>
-                <div class="col">
-                  <select name="lstCarLisence[]" id="carLisenceOpt" multiple   size="4" class="form-control">
-                    
-                  </select>
-                </div>
-                <div class="col">
-                  <select name="lstCarModel[]" id="carModelOpt" multiple   size="4" class="form-control">
-                    
-                  </select>
-                </div>
+                </select>
               </div>
+              <div class="col">
+                <select name="lstCarColor[]" id="carColorOpt" multiple size="4" class="form-control">
 
-              <div class="form-group text-center">
-                <input  type="button" id="addopt" class="btn  btn-success" style="width:50%" value="Add Car" >
+                </select>
               </div>
-              <div class="form-group">
-                <div class="input-icon">
-                  <i class="lni-user"></i>
-                  <input type="text" id="addres" class="form-control" name="address" placeholder="Address">
-                </div>
-              </div>
+              <div class="col">
+                <select name="lstCarLisence[]" id="carLisenceOpt" multiple size="4" class="form-control">
 
-              <div class="form-group">
-                <div class="input-icon">
-                  <i class="lni-envelope"></i>
-                  <input type="email" required id="" class="form-control" name="email" placeholder="Email Address">
-                </div>
+                </select>
               </div>
-              <div class="form-group">
-                <div class="input-icon">
-                  <i class="lni-lock"></i>
-                  <input type="password" name="password" class="form-control" placeholder="Password">
-                </div>
+              <div class="col">
+                <select name="lstCarModel[]" id="carModelOpt" multiple size="4" class="form-control">
+
+                </select>
               </div>
-              <div class="form-group">
-                <div class="input-icon">
-                  <i class="lni-lock"></i>
-                  <input type="password" name="repassword" class="form-control" placeholder="Retype Password">
-                </div>
+            </div>
+
+            <div class="form-group text-center">
+              <input type="button" id="addopt" class="btn  btn-success" style="width:50%" value="Add Car">
+            </div>
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="lni-user"></i>
+                <input type="text" id="addres" class="form-control" name="address" placeholder="Address">
               </div>
-              <div class="form-group mb-3">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" name="chkterms" class="custom-control-input" id="checkedall">
-                  <label class="custom-control-label" for="checkedall">By registering, you accept our
-                    Terms & Conditions</label>
-                </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="lni-envelope"></i>
+                <input type="email" required id="" class="form-control" name="email" placeholder="Email Address">
               </div>
-              <div class="text-center">
-                <input type="submit" class="btn btn-common  log-btn" style="width:100%" name="submit" value="Register">
+            </div>
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="lni-lock"></i>
+                <input type="password" name="password" class="form-control" placeholder="Password">
               </div>
-            </form>
-          </div>
+            </div>
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="lni-lock"></i>
+                <input type="password" name="repassword" class="form-control" placeholder="Retype Password">
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" name="chkterms" class="custom-control-input" id="checkedall">
+                <label class="custom-control-label" for="checkedall">By registering, you accept our
+                  Terms & Conditions</label>
+              </div>
+            </div>
+            <div class="text-center">
+              <input type="submit" class="btn btn-common  log-btn" style="width:100%" name="submit" value="Register">
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 <?php
 include "footer.php";
 ?>
