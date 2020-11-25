@@ -7,7 +7,6 @@
     } else {
       include_once "header.php";
     }
-
     ?>
     <!-- header and search bar  -->
     <header id="header-wrap">
